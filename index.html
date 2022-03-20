@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ECOM</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<body class="width_100 fl">
+
+	<div class="lighbox_main" id="lighbox_main" style="display: none;">
+		<div class="width_100 fl">
+			<button type="button" class="btn btn-primary pull-right" onclick="toggleLB()">Back</button>
+		</div>
+		<div class="invoice-box">
+			<table>
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td class="title">
+									CompName
+								</td>
+								<td>
+									Invoice #: 01
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>
+									Company Address<br>
+									Address Line 1,<br>
+									Address Line 2
+								</td>
+								<td>
+									<span id="fname"></span><br>
+									<span id="femail"></span>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr class="heading">
+					<td>Payment Method</td>
+					<td>Card #</td>
+				</tr>
+				<tr class="details">
+					<td>Card Number</td>
+					<td>xxxx-xxxx-xxxx-<span id="fcard"></span></td>
+				</tr>
+				<tr class="details">
+					<td>Card Expiry Details</td>
+					<td><span id="fexpM"></span> <span id="fexpY"></span></td>
+				</tr>
+			</table>
+			<table>
+				<tr class="heading">
+					<td width="50%" style="text-align: left;">Item</td>
+					<td width="25%" style="text-align: right;">Quantity</td>
+					<td width="25%" style="text-align: right;">Price</td>
+				</tr>
+			</table>
+			<table id="custom_bill">
+				<tr class="item">
+					<td width="50%" style="text-align: left;">Test</td>
+					<td width="25%" style="text-align: right;">2x</td>
+					<td width="25%" style="text-align: right;">$10</td>
+				</tr>
+			</table>
+			<table id="">
+				<tr class="item">
+					<td width="75%" collspan="2" style="text-align: left;">Donation Amount 10% of Total $<span id="fTotal"></span></td>
+					<!-- <td width="25%" style="text-align: right;">2x</td> -->
+					<td width="25%" style="text-align: right;">$<span id="fPrec"></span></td>
+				</tr>
+			</table>
+			<table>
+				<tr class="total">
+					<td>&nbsp;</td>
+
+					<td>Total: $<span id="fgrandTotal"></span></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="purchase_form_parent">
+		<h2>Fill the checkout form</h2>
+		<form class="width_100 fl" action="" method="">
+			<hr>
+			<h4>Basic Details</h4>
+
+
+			<div class="width_100 fl">
+				<div class="input-box field_parent active-grey">
+					<label class="input-label">Name</label>
+					<input type="text" class="input-1" id="userFullName" />
+					<label class="input-label error_mgs">Please Enter Valid Name</label>
+				</div>
+				<div class="input-box field_parent active-grey">
+					<label class="input-label">Email</label>
+					<input type="text" class="input-1" id="useremail" />
+					<label class="input-label error_mgs">Please Enter Valid Email</label>
+				</div>
+			</div>
+			<div class="input-box active-grey">
+				<label class="input-label">Credit Card Number</label>
+				<input type="text" class="input-1" placeholder="xxxx-xxxx-xxxx-xxxx" id="cc_number" name="cc_number" onkeypress="return checkDigit(event)" onkeyup="return checkDigit(event)" />
+				<label class="input-label error_mgs">Please Enter Valid Card Details</label>
+			</div>
+			<div class="width_100">
+				<div class="input-box active-grey field_parent">
+					<label class="input-label">Expiry Month</label>
+
+					<input type="text" class="input-1" maxlength="2" onkeypress="return check_month(event)" onkeyup="return check_month(event)" id="cc_month">
+
+
+					<!-- <select class="input-1" id="cc_month">
+						<option value=""></option>
+						<option value="Jan">Jan</option>
+						<option value="Feb">Feb</option>
+						<option value="Mar">Mar</option>
+						<option value="Apr">Apr</option>
+						<option value="May">May</option>
+						<option value="Jun">Jun</option>
+						<option value="Jul">Jul</option>
+						<option value="Aug">Aug</option>
+						<option value="Sep">Sep</option>
+						<option value="Oct">Oct</option>
+						<option value="Nov">Nov</option>
+						<option value="Dec">Dec</option>
+					</select> -->
+					<label class="input-label error_mgs">Enter Valid Month</label>
+				</div>
+				<div class="input-box active-grey field_parent">
+					<label class="input-label">Expiry Year</label>
+					<input type="text" class="input-1" maxlength="4" onkeypress="return check_month(event)" onkeyup="return check_month(event)" id="cc_year">
+					<!-- <select class="input-1" id="cc_year">
+						<option value="">
+						<option value="2023">2023</option>
+						<option value="2024">2024</option>
+						<option value="2025">2025</option>
+						<option value="2026">2026</option>
+						<option value="2027">2027</option>
+						<option value="2028">2028</option>
+						<option value="2029">2029</option>
+						<option value="2030">2030</option>
+						<option value="2031">2031</option>
+						<option value="2032">2032</option>
+						<option value="2033">2033</option>
+						<option value="2034">2034</option>
+						<option value="2035">2035</option>
+						<option value="2036">2036</option>
+						<option value="2037">2037</option>
+						<option value="2038">2038</option>
+						<option value="2039">2039</option>
+						<option value="2040">2040</option>
+						<option value="2041">2041</option>
+						<option value="2042">2042</option>
+						<option value="2043">2043</option>
+						<option value="2044">2044</option>
+						<option value="2045">2045</option>
+						<option value="2046">2046</option>
+						<option value="2047">2047</option>
+						<option value="2048">2048</option>
+						<option value="2049">2049</option>
+						<option value="2050">2050</option>
+						<option value="2051">2051</option>
+						<option value="2052">2052</option>
+						<option value="2053">2053</option>
+						<option value="2054">2054</option>
+						<option value="2055">2055</option>
+						<option value="2056">2056</option>
+						<option value="2057">2057</option>
+						<option value="2058">2058</option>
+						<option value="2059">2059</option>
+						<option value="2060">2060</option>
+						<option value="2061">2061</option>
+						<option value="2062">2062</option>
+						<option value="2063">2063</option>
+						<option value="2064">2064</option>
+						<option value="2065">2065</option>
+						<option value="2066">2066</option>
+						<option value="2067">2067</option>
+					</select> -->
+					<label class="input-label error_mgs">Enter Valid Year</label>
+				</div>
+			</div>
+			<div class="clear"></div>
+
+			<hr>
+			
+			<div class="clear"></div>
+			<div class="width_100 fl">
+				<div class="width_100 field_parent">
+					<h4>Choose Products</h4>
+					<div class="product_p_d width_100 fl" >
+						<div class="input-box field_parent active-grey">
+							<p class="addProduct" id="product_lable_0"></p>
+						</div>
+						<div class="input-box field_parent active-grey">
+							<label class="input-label">Qty</label>
+							<input type="text" class="input-1 product_price" maxlength="2" onkeypress="return check_num(event)" onkeyup="return check_num(event)" id="product_0"   />
+						</div>
+					</div>
+					<div class="product_p_d width_100 fl" >
+						<div class="input-box field_parent active-grey">
+							<p class="addProduct" id="product_lable_1"></p>
+						</div>
+						<div class="input-box field_parent active-grey">
+							<label class="input-label">Qty</label>
+							<input type="text" class="input-1 product_price" maxlength="2" onkeypress="return check_num(event)" onkeyup="return check_num(event)" id="product_1"   />
+						</div>
+					</div>
+					<div class="product_p_d width_100 fl" >
+						<div class="input-box field_parent active-grey">
+							<p class="addProduct" id="product_lable_2"></p>
+						</div>
+						<div class="input-box field_parent active-grey">
+							<label class="input-label">Qty</label>
+							<input type="text" class="input-1 product_price" maxlength="2" onkeypress="return check_num(event)" onkeyup="return check_num(event)" id="product_2"   />
+						</div>
+					</div>
+					<div class="product_p_d width_100 fl" >
+						<div class="input-box field_parent active-grey">
+							<p class="addProduct" id="product_lable_3"></p>
+						</div>
+						<div class="input-box field_parent active-grey">
+							<label class="input-label">Qty</label>
+							<input type="text" class="input-1 product_price" maxlength="2" onkeypress="return check_num(event)" onkeyup="return check_num(event)" id="product_3"   />
+						</div>
+					</div>
+					<div class="product_p_d width_100 fl" >
+						<div class="input-box field_parent active-grey">
+							<p class="addProduct" id="product_lable_4"></p>
+						</div>
+						<div class="input-box field_parent active-grey">
+							<label class="input-label">Qty</label>
+							<input type="text" class="input-1 product_price" maxlength="2" onkeypress="return checkDigit(event)" onkeyup="return checkDigit(event)" id="product_4"   />
+						</div>
+					</div>
+				</div>
+				<div class="width_100 field_parent">
+					<h4>Summery</h4>
+					
+					<div class="width_100 fl mar_b_10 show_all_p_t">
+						<div class="s_title sum_div"><strong>Product Name</strong></div>
+						<div class="s_title sum_div"><strong>Qty</strong></div>
+						<div class="s_title sum_div"><strong>Total Price</strong></div>
+					</div>
+					<div class="width_100 fl" id="append_here">
+						
+					</div>
+
+					<div class="width_100 fl mar_b_10 show_all_p_t">
+						<div class="s_title sum_div"><strong>&nbsp;</strong></div>
+						<div class="s_title sum_div"><strong>Total</strong></div>
+						<div class="s_title sum_div"><strong>$</strong><strong id="all_p_total">0</strong></div>
+					</div>
+					<div class="width_100 fl mar_b_10 show_all_p_t">
+						<div class="s_title sum_div v2"><strong>Donation Amount 10%  of Total $<span id="all_p_total2">0</span></strong></div>
+						<div class="s_title sum_div"><strong>$</strong><strong id="all_p_total_percent">0</strong></div>
+					</div>
+					<div class="width_100 fl mar_b_10">
+						&nbsp;
+					</div>
+					<div class="width_100 fl mar_b_10 show_all_p_t grandTotal_d">
+						<div class="s_title sum_div v2"><strong>Grand Total</strong></div>
+						<div class="s_title sum_div"><strong>$</strong><strong id="grandTotal">0</strong></div>
+					</div>
+					
+				</div>
+			</div>
+
+
+
+
+			<div class="clear"></div>
+			<button type="button" class="btn btn-primary pull-right" onclick="submitForm(event)">Checkout</button>
+			<div class="clear"></div>
+		</form>
+	</div>
+
+</body>
+
+
+<script type="text/javascript" src="js/custom.js"></script>
+</html>
